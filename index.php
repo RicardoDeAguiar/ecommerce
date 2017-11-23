@@ -1,32 +1,22 @@
- <?php 
+<?php 
+session_start();
+require_once("vendor/autoload.php");
 
-require_once("vendor/autoload.php"); //tras as dependencias que o projeto precisa
-
-use \Slim\Slim;   //carrega as namespace que eu preciso dentro de milhares
-use \Hcode\Page;
-use \Hcode\PageAdmin;
-
-$app = new \Slim\Slim(); //rota nova aplicação
-
-$app->config('debug', true); //se tiver erro ele vai mostrar com o comando debug
-
-$app->get('/', function() {  //chamada padrão
-	
-	$page = new Page();  //coloca o header 
-	
-	$page->setTpl("index");  //carrega o conteudo do index e o destrutor que vai no rodapé
-    
-});
-
-$app->get('/admin', function() {  //chamada padrão
-	
-	$page = new PageAdmin();  //coloca o header 
-	
-	$page->setTpl("index");  //carrega o conteudo do index e o destrutor que vai no rodapé
-    
-});
+use \Slim\Slim;
 
 
-$app->run();   //executa
+$app = new Slim();
+
+$app->config('debug', true);
+
+require_once("functions.php");
+require_once("site.php");
+require_once("admin.php");
+require_once("admin-users.php");
+require_once("admin-categories.php");
+require_once("admin-products.php");
+require_once("admin-orders.php");
+
+$app->run();
 
  ?>
